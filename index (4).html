@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KAMI: The New Week</title>
+<style>
+:root{
+  --bg:#05070d;
+  --gold:#f3c86a;
+  --red:#8e1624;
+  --blue:#7db8ff;
+  --cream:#f8f1df;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--bg);
+  color:#fff;
+  font-family:Inter,Arial,sans-serif;
+  overflow-x:hidden;
+}
+body::before{
+  content:"";
+  position:fixed; inset:0; pointer-events:none; z-index:30;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(125,184,255,.08), transparent 28%),
+    radial-gradient(circle at 80% 25%, rgba(142,22,36,.10), transparent 32%),
+    linear-gradient(rgba(255,255,255,.015) 1px, transparent 1px);
+  background-size:auto,auto,100% 4px;
+  mix-blend-mode:screen;
+}
+.screen{
+  min-height:100vh;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:34px 20px;
+  overflow:hidden;
+}
+.center{width:min(1100px,100%); margin:auto; text-align:center}
+.kicker{
+  text-transform:uppercase;
+  letter-spacing:.34em;
+  font-size:12px;
+  color:#d6d6d6;
+}
+h1,h2{
+  font-family:Georgia, 'Times New Roman', serif;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  margin:.25em 0;
+}
+h1{
+  font-size:clamp(54px,12vw,150px);
+  line-height:.85;
+  text-shadow:0 0 30px rgba(243,200,106,.20);
+}
+h2{font-size:clamp(35px,7vw,80px)}
+.gold{color:var(--gold)}
+.muted{color:#b7bcc8}
+.btn{
+  border:1px solid rgba(255,255,255,.35);
+  background:rgba(255,255,255,.04);
+  color:white;
+  padding:15px 24px;
+  border-radius:999px;
+  font-weight:700;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  cursor:pointer;
+  backdrop-filter: blur(12px);
+  transition:.25s ease;
+}
+.btn:hover{transform:translateY(-2px); background:#fff; color:#000}
+
+#intro{
+  background:
+    linear-gradient(to bottom,rgba(5,7,13,.34),rgba(5,7,13,.93)),
+    url("hero.jpeg") center 32%/cover;
+}
+#intro::after{
+  content:"";
+  position:absolute; inset:0;
+  background:linear-gradient(90deg,rgba(0,0,0,.55),transparent 28%,transparent 72%,rgba(0,0,0,.55));
+}
+#intro .center{position:relative; z-index:2}
+.subtitle{font-size:clamp(16px,2.7vw,25px); max-width:700px; margin:22px auto 34px; color:#e2e4ea}
+
+.fade-up{opacity:0; transform:translateY(30px); transition:1s cubic-bezier(.2,.7,.2,1)}
+.visible.fade-up{opacity:1; transform:none}
+
+.flashback{
+  background:
+   radial-gradient(circle at 50% 40%,rgba(243,200,106,.10),transparent 34%),
+   linear-gradient(180deg,#0b0d14,#05070d);
+}
+.bee{
+  font-size:90px;
+  filter:drop-shadow(0 0 25px rgba(243,200,106,.45));
+  animation:float 2.2s ease-in-out infinite;
+}
+@keyframes float{50%{transform:translateY(-15px) rotate(4deg)}}
+.quote{
+  max-width:800px; margin:20px auto; font-size:clamp(22px,4vw,42px);
+  font-family:Georgia,serif; line-height:1.2;
+}
+.small{font-size:14px; color:#9ea5b1}
+
+.mosquito{
+ background:
+   linear-gradient(rgba(5,7,13,.18),rgba(5,7,13,.9)),
+   url("snack.jpeg") center/cover;
+}
+.mosquito::before{
+  content:"";
+  position:absolute; inset:0;
+  background:radial-gradient(circle at 70% 30%,rgba(142,22,36,.55),transparent 30%);
+  mix-blend-mode:screen;
+}
+.mosquito .center{position:relative; z-index:2}
+.swarm{
+  position:absolute; inset:0; pointer-events:none; overflow:hidden;
+}
+.m{position:absolute; font-size:30px; opacity:.8; animation:fly 8s linear infinite}
+.m:nth-child(1){left:6%;top:15%;animation-delay:-2s}
+.m:nth-child(2){left:18%;top:67%;animation-delay:-4s}
+.m:nth-child(3){left:82%;top:18%;animation-delay:-1s}
+.m:nth-child(4){left:70%;top:60%;animation-delay:-6s}
+.m:nth-child(5){left:45%;top:10%;animation-delay:-3s}
+.m:nth-child(6){left:90%;top:70%;animation-delay:-5s}
+@keyframes fly{
+  0%{transform:translate(0,0) rotate(0)}
+  25%{transform:translate(60px,-40px) rotate(25deg)}
+  50%{transform:translate(-40px,35px) rotate(-20deg)}
+  75%{transform:translate(35px,50px) rotate(10deg)}
+  100%{transform:translate(0,0) rotate(0)}
+}
+.threat{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:14px;
+  margin:34px auto 0; max-width:800px;
+}
+.card{
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:20px;
+  padding:22px;
+  background:rgba(7,9,14,.55);
+  backdrop-filter:blur(10px);
+}
+.card strong{display:block;font-size:26px;margin-bottom:5px}
+@media(max-width:700px){.threat{grid-template-columns:1fr}}
+
+#newweek{
+  background:
+    radial-gradient(circle at 50% 75%, rgba(125,184,255,.18), transparent 35%),
+    linear-gradient(180deg,#05070d,#0b1220);
+}
+.line{
+  width:min(620px,80%); height:1px; margin:24px auto;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.mission{
+  max-width:720px; margin:0 auto;
+  border:1px solid rgba(243,200,106,.25);
+  border-radius:28px;
+  padding:30px;
+  background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));
+}
+.stamp{
+  display:inline-block; padding:9px 14px; border:1px solid #be1f34; color:#ff6678;
+  transform:rotate(-3deg); letter-spacing:.2em; font-weight:900; margin-bottom:16px;
+}
+.question{
+  font-size:clamp(90px,28vw,280px);
+  font-family:Georgia,serif;
+  line-height:.72;
+  color:transparent;
+  -webkit-text-stroke:2px rgba(255,255,255,.85);
+  text-shadow:0 0 45px rgba(125,184,255,.15);
+  animation:pulse 2s infinite ease-in-out;
+}
+@keyframes pulse{50%{transform:scale(1.03); opacity:.72}}
+
+#ending{
+ background:
+   linear-gradient(rgba(5,7,13,.35),rgba(5,7,13,.92)),
+   url("hero.jpeg") center 40%/cover;
+}
+.finalbox{
+  max-width:700px; margin:auto;
+  padding:35px;
+  border-radius:30px;
+  background:rgba(5,7,13,.55);
+  border:1px solid rgba(255,255,255,.16);
+  backdrop-filter:blur(14px);
+}
+.bigline{font-size:clamp(34px,7vw,72px); font-family:Georgia,serif; margin:0}
+.endnote{font-size:18px; color:#d4d7de; line-height:1.6}
+.scrollhint{
+ position:absolute; bottom:22px; left:50%; transform:translateX(-50%);
+ font-size:11px; letter-spacing:.25em; text-transform:uppercase; opacity:.65;
+}
+</style>
+</head>
+<body>
+
+<section class="screen" id="intro">
+  <div class="center">
+    <div class="kicker fade-up">A very serious cinematic event</div>
+    <h1 class="fade-up">KAMI:<br><span class="gold">THE NEW WEEK</span></h1>
+    <p class="subtitle fade-up">She has survived more than anyone should have to survive before Monday.</p>
+    <button class="btn fade-up" onclick="document.getElementById('bee').scrollIntoView({behavior:'smooth'})">Begin the story</button>
+  </div>
+  <div class="scrollhint">scroll to enter the cinematic universe</div>
+</section>
+
+<section class="screen flashback" id="bee">
+  <div class="center">
+    <div class="kicker fade-up">Previously...</div>
+    <div class="bee fade-up">🐝</div>
+    <h2 class="fade-up">The Lithuania Incident</h2>
+    <p class="quote fade-up">One step. One bee. One foot that absolutely did not deserve this.</p>
+    <p class="small fade-up">Pain level: dramatic enough to become canon.</p>
+  </div>
+</section>
+
+<section class="screen mosquito" id="mosquito">
+  <div class="swarm">
+    <div class="m">🦟</div><div class="m">🦟</div><div class="m">🦟</div>
+    <div class="m">🦟</div><div class="m">🦟</div><div class="m">🦟</div>
+  </div>
+  <div class="center">
+    <div class="kicker fade-up">And then came...</div>
+    <h2 class="fade-up">THE MOSQUITO TEAM</h2>
+    <p class="quote fade-up">Fast. Annoying. Uninvited. Somehow organized.</p>
+    <div class="threat">
+      <div class="card fade-up"><strong>🦟 100%</strong> Unnecessary confidence</div>
+      <div class="card fade-up"><strong>⚠️ EXTREME</strong> Annoyance level</div>
+      <div class="card fade-up"><strong>0%</strong> Respect for personal space</div>
+    </div>
+  </div>
+</section>
+
+<section class="screen" id="newweek">
+  <div class="center">
+    <div class="kicker fade-up">But now...</div>
+    <h2 class="fade-up">A NEW WEEK BEGINS</h2>
+    <div class="line fade-up"></div>
+    <div class="mission fade-up">
+      <div class="stamp">CLASSIFIED</div>
+      <p class="muted">Monday has arrived. The past enemies are known. The next one is not.</p>
+      <div class="question">?</div>
+      <p class="quote" style="font-size:clamp(24px,4vw,40px)">What will Kami face this week?</p>
+      <p class="small">No spoilers. No intelligence. No witnesses.</p>
+    </div>
+  </div>
+</section>
+
+<section class="screen" id="ending">
+  <div class="center">
+    <div class="finalbox fade-up">
+      <div class="kicker">Official prediction</div>
+      <p class="bigline">She will survive.</p>
+      <p class="endnote">
+        Probably.<br>
+        Unless the mosquitoes have formed an alliance with Economics.
+      </p>
+      <button class="btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">Replay</button>
+    </div>
+  </div>
+</section>
+
+<script>
+const items = document.querySelectorAll('.fade-up');
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.classList.add('visible');
+  });
+},{threshold:.18});
+items.forEach(el=>observer.observe(el));
+
+// subtle cinematic parallax
+window.addEventListener('scroll',()=>{
+  const y = window.scrollY;
+  document.body.style.setProperty('--scrollY', y+'px');
+});
+</script>
+</body>
+</html>
